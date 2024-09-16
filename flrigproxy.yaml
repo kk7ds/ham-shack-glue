@@ -1,0 +1,15 @@
+rigs:
+    - name: IC7610
+      flrigport: 12345
+      proxies:
+        - COM176
+    - name: IC7300
+      flrigport: 12346
+      proxies:
+        - COM173
+    - name: IC9700
+      flrigport: 12347
+      proxies:
+        - COM197
+rigctlcom: "C:\\Program Files\\hamlib-w64-4.5.5\\bin\\rigctlcom.exe"
+loglevel: INFO

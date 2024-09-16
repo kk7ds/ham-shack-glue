@@ -1,0 +1,13 @@
+loglevel: INFO
+source:
+    port: 2237
+    host: 127.0.0.1
+destinations:
+    - port: 2238
+      name: Log4OM
+    - port: 2239
+      name: GridTracker
+    - port: 2240
+      name: JTSync
+    - port: 2242
+      name: N1MM
