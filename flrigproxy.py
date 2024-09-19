@@ -65,8 +65,8 @@ class RigProxy:
                 self._proxy_loop()
             except ConnectionRefusedError:
                 pass
-            except socket.error:
-                self.log.debug('Socket reset')
+            except socket.error as e:
+                self.log.debug('Socket reset: %s', e)
                 self._reset()
             except Exception as e:
                 self.log.exception('Unexpected failure in loop: %s', e)
@@ -93,7 +93,7 @@ class RigProxy:
         self._flrig_sock = socket.socket(socket.AF_INET,
                                          socket.SOCK_STREAM)
         self._flrig_sock.connect(('127.0.0.1', self.port))
-        self.log.info('Connected to flrig')
+        self.log.info('Connected to flrig on %i', self.port)
 
     def _spawn_rigctlcom(self):
         """Spawn a rigctlcom instance
@@ -131,11 +131,11 @@ class RigProxy:
             if self._rigctlcom_sock in r:
                 data = self._rigctlcom_sock.recv(65536)
                 self._flrig_sock.send(data)
-                self.log.debug('-> %i' % len(data))
+                #self.log.debug('-> %i' % len(data))
             if self._flrig_sock in r:
                 data = self._flrig_sock.recv(65536)
                 self._rigctlcom_sock.send(data)
-                self.log.debug('<- %i' % len(data))
+                #self.log.debug('<- %i' % len(data))
 
 
 class RigProxies:
